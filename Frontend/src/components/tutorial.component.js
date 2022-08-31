@@ -6,6 +6,8 @@ export default class Tutorial extends Component {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeValor = this.onChangeValor.bind(this);
+    this.onChangeDia = this.onChangeDia.bind(this);
     this.getTutorial = this.getTutorial.bind(this);
     this.updatePublished = this.updatePublished.bind(this);
     this.updateTutorial = this.updateTutorial.bind(this);
@@ -16,6 +18,8 @@ export default class Tutorial extends Component {
         id: null,
         title: "",
         description: "",
+        valor: "",
+        dia: "",
         published: false
       },
       message: ""
@@ -50,6 +54,29 @@ export default class Tutorial extends Component {
     }));
   }
 
+  onChangeValor(e) {
+    const valor = e.target.value;
+    
+    this.setState(prevState => ({
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        valor: valor
+      }
+    }));
+  }
+  onChangeDia(e) {
+    const dia = e.target.value;
+
+    this.setState(function(prevState) {
+      return {
+        currentTutorial: {
+          ...prevState.currentTutorial,
+          title: dia
+        }
+      };
+    });
+  }
+
   getTutorial(id) {
     TutorialDataService.get(id)
       .then(response => {
@@ -68,6 +95,8 @@ export default class Tutorial extends Component {
       id: this.state.currentTutorial.id,
       title: this.state.currentTutorial.title,
       description: this.state.currentTutorial.description,
+      valor: this.state.currentTutorial.valor,
+      dia: this.state.currentTutorial.dia,
       published: status
     };
 
@@ -123,11 +152,12 @@ export default class Tutorial extends Component {
             <h4>Debito</h4>
             <form>
               <div className="form-group">
-                <label htmlFor="title">Titulo</label>
+                <label htmlFor="title">Nome</label>
                 <input
                   type="text"
                   className="form-control"
                   id="title"
+                  autocomplete="off"
                   value={currentTutorial.title}
                   onChange={this.onChangeTitle}
                 />
@@ -138,11 +168,35 @@ export default class Tutorial extends Component {
                   type="text"
                   className="form-control"
                   id="description"
+                  autocomplete="off"
                   value={currentTutorial.description}
                   onChange={this.onChangeDescription}
                 />
               </div>
-
+              <div className="form-group">
+                <label htmlFor="valor">Valor</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="valor"
+                  autocomplete="off"
+                  value={currentTutorial.valor}
+                  onChange={this.onChangeValor}
+                  
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="dia">Vencimento</label>
+                <input
+                  type="date"
+                  min="2022-01-01" max="2022-12-31"
+                  className="form-control"
+                  id="dia"
+                  autocomplete="off"
+                  value={currentTutorial.dia}
+                  onChange={this.onChangedia}
+                />
+              </div>
               <div className="form-group">
                 <label>
                   <strong>Status:</strong>

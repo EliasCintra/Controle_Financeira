@@ -2,24 +2,26 @@ const db = require("../models");
 const Tutorial = db.tutorials;
 const Op = db.Sequelize.Op;
 
-// Create and Save a new Tutorial
+// criar e salvar um novo debito
 exports.create = (req, res) => {
-  // Validate request
+  // Validador
   if (!req.body.title) {
     res.status(400).send({
-      message: "Content can not be empty!"
+      message: "O conteúdo não pode estar vazio!"
     });
     return;
   }
 
-  // Create a Tutorial
+  // Cria um debito
   const tutorial = {
     title: req.body.title,
     description: req.body.description,
-    published: req.body.published ? req.body.published : false
+    published: req.body.published ? req.body.published : false,
+    valor: req.body.valor,
+    dia: req.body.dia
   };
 
-  // Save Tutorial in the database
+  // Salva o debito no banco de dados
   Tutorial.create(tutorial)
     .then(data => {
       res.send(data);
@@ -27,12 +29,12 @@ exports.create = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while creating the Tutorial."
+          err.message || "Ocorreu algum erro ao conectar ao salvar no banco."
       });
     });
 };
 
-// Retrieve all Tutorials from the database.
+// Lista todos os debitos do banco de dados
 exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
@@ -44,12 +46,12 @@ exports.findAll = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Ocorreu algum erro ao conectar ao listar do banco."
       });
     });
 };
 
-// Find a single Tutorial with an id
+// Listar com consulta por id 
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
@@ -59,18 +61,18 @@ exports.findOne = (req, res) => {
         res.send(data);
       } else {
         res.status(404).send({
-          message: `Cannot find Tutorial with id=${id}.`
+          message: `Não encontrado debito com ID =${id}.`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error retrieving Tutorial with id=" + id
+        message: "Erro ao recuperar o debito com id=" + id
       });
     });
 };
 
-// Update a Tutorial by the id in the request
+// Atualizar um debito pelo id na solicitação
 exports.update = (req, res) => {
   const id = req.params.id;
 
@@ -80,22 +82,22 @@ exports.update = (req, res) => {
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Tutorial was updated successfully."
+          message: "Atualizado debito com sucesso."
         });
       } else {
         res.send({
-          message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+          message: `Não é possível atualizar o debito com id=${id}. Talvez o debito não foi encontrado ou req.body está vazio!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Error updating Tutorial with id=" + id
+        message: "Erro ao atualizar o debito com id=" + id
       });
     });
 };
 
-// Delete a Tutorial with the specified id in the request
+// Deletar um debito
 exports.delete = (req, res) => {
   const id = req.params.id;
 
@@ -105,39 +107,39 @@ exports.delete = (req, res) => {
     .then(num => {
       if (num == 1) {
         res.send({
-          message: "Tutorial was deleted successfully!"
+          message: "Debito deletado com sucesso!"
         });
       } else {
         res.send({
-          message: `Cannot delete Tutorial with id=${id}. Maybe Tutorial was not found!`
+          message: `Não é possível deletar o debito com id=${id}. Debito não encontrado!`
         });
       }
     })
     .catch(err => {
       res.status(500).send({
-        message: "Could not delete Tutorial with id=" + id
+        message: "Não foi possível excluir o debito com id=" + id
       });
     });
 };
 
-// Delete all Tutorials from the database.
+// Deletar todos os debitos do Banco de dados 
 exports.deleteAll = (req, res) => {
   Tutorial.destroy({
     where: {},
     truncate: false
   })
     .then(nums => {
-      res.send({ message: `${nums} Tutorials were deleted successfully!` });
+      res.send({ message: `${nums} Deletado todos os debitos com sucesso!` });
     })
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while removing all tutorials."
+          err.message || "Ocorreu algum erro ao deletar todos os debitos."
       });
     });
 };
 
-// find all published Tutorial
+// encontrar todos os debitos publicados
 exports.findAllPublished = (req, res) => {
   Tutorial.findAll({ where: { published: true } })
     .then(data => {
@@ -146,7 +148,7 @@ exports.findAllPublished = (req, res) => {
     .catch(err => {
       res.status(500).send({
         message:
-          err.message || "Some error occurred while retrieving tutorials."
+          err.message || "Ocorreu algum erro ao consultar os debitos."
       });
     });
 };

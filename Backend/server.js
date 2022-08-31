@@ -10,28 +10,22 @@ var corsOptions = {
 
 app.use(cors(corsOptions));
 
-// parse requests of content-type - application/json
-app.use(express.json());  /* bodyParser.json() is deprecated */
+app.use(express.json());  
 
-// parse requests of content-type - application/x-www-form-urlencoded
-app.use(express.urlencoded({ extended: true }));   /* bodyParser.urlencoded() is deprecated */
+app.use(express.urlencoded({ extended: true }));  
 
 const db = require("./app/models");
 db.sequelize.sync();
-// // drop the table if it already exists
-// db.sequelize.sync({ force: true }).then(() => {
-//   console.log("Drop and re-sync db.");
-// });
 
-// simple route
+// teste de conexão
 app.get("/", (req, res) => {
-  res.json({ message: "Welcome to bezkoder application." });
+  res.json({ message: "Bem vindo ao sistema FINAN." });
 });
 
 require("./app/routes/turorial.routes")(app);
 
-// set port, listen for requests
+// selecionar porta e validar rota
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}.`);
+  console.log(`Serviço rodando em porta ${PORT}.`);
 });

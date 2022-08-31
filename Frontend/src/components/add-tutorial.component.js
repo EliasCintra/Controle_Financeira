@@ -1,11 +1,15 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 
+
+
 export default class AddTutorial extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeValor = this.onChangeValor.bind(this);
+    this.onChangeDia = this.onChangeDia.bind(this);
     this.saveTutorial = this.saveTutorial.bind(this);
     this.newTutorial = this.newTutorial.bind(this);
 
@@ -13,8 +17,10 @@ export default class AddTutorial extends Component {
       id: null,
       title: "",
       description: "", 
+      valor: "",
+      dia: "",
       published: false,
-
+      
       submitted: false
     };
   }
@@ -31,10 +37,24 @@ export default class AddTutorial extends Component {
     });
   }
 
+  onChangeValor(e) {
+    this.setState({
+      valor: e.target.value
+    });
+  }
+
+  onChangeDia(e) {
+    this.setState({
+      dia: e.target.value
+    });
+  }
+
   saveTutorial() {
     var data = {
       title: this.state.title,
-      description: this.state.description
+      description: this.state.description,
+      valor: this.state.valor,
+      dia: this.state.dia
     };
 
     TutorialDataService.create(data)
@@ -43,6 +63,8 @@ export default class AddTutorial extends Component {
           id: response.data.id,
           title: response.data.title,
           description: response.data.description,
+          valor: response.data.valor,
+          dia: response.data.dia,
           published: response.data.published,
 
           submitted: true
@@ -59,6 +81,8 @@ export default class AddTutorial extends Component {
       id: null,
       title: "",
       description: "",
+      valor: "",
+      dia: "",
       published: false,
 
       submitted: false
@@ -78,7 +102,7 @@ export default class AddTutorial extends Component {
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Titulo</label>
+              <label htmlFor="title">Nome </label>
               <input
                 type="text"
                 className="form-control"
@@ -87,6 +111,7 @@ export default class AddTutorial extends Component {
                 value={this.state.title}
                 onChange={this.onChangeTitle}
                 name="title"
+                autocomplete="off"
               />
             </div>
 
@@ -96,10 +121,42 @@ export default class AddTutorial extends Component {
                 type="text"
                 className="form-control"
                 id="description"
-                required
                 value={this.state.description}
                 onChange={this.onChangeDescription}
                 name="description"
+                autocomplete="off"
+              />
+            </div>
+
+
+            <div className="form-group">
+              <label htmlFor="valor">Valor</label>
+              <input
+                type="number"
+                className="form-control"
+                precision="2"
+                id="valor"
+                required
+                value={this.state.valor}
+                onChange={this.onChangeValor}
+                name="valor"
+                autocomplete="off"
+              />
+            </div>
+
+
+            <div className="form-group">
+              <label htmlFor="dia">Vencimento</label>
+              <input
+                type="date"
+                className="form-control"
+                id="dia"
+                required
+                value={this.state.dia}
+                min="2022-01-01" max="2022-12-31"
+                onChange={this.onChangeDia}
+                name="dia"
+                autocomplete="off"
               />
             </div>
 

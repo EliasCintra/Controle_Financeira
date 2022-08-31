@@ -6,6 +6,12 @@ module.exports = (sequelize, Sequelize) => {
     description: {
       type: Sequelize.STRING
     },
+    valor: {
+      type: Sequelize.STRING
+    },
+    dia: {
+      type: Sequelize.STRING
+    },
     published: {
       type: Sequelize.BOOLEAN
     }

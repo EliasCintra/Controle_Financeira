@@ -99,7 +99,7 @@ export default class TutorialsList extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Pesquise por titulo"
+              placeholder="Pesquise por nome do debito."
               value={searchTitle}
               onChange={this.onChangeSearchTitle}
             />
@@ -146,7 +146,7 @@ export default class TutorialsList extends Component {
               <h4>Debito</h4>
               <div>
                 <label>
-                  <strong>Titulos:</strong>
+                  <strong>Nome:</strong>
                 </label>{" "}
                 {currentTutorial.title}
               </div>
@@ -155,6 +155,18 @@ export default class TutorialsList extends Component {
                   <strong>Descrição:</strong>
                 </label>{" "}
                 {currentTutorial.description}
+              </div>
+              <div>
+                <label>
+                  <strong>Valor:</strong>
+                </label>{" "}
+                {currentTutorial.valor}
+              </div>
+              <div>
+                <label>
+                  <strong>Data:</strong>
+                </label>{" "}
+                {currentTutorial.dia}
               </div>
               <div>
                 <label>
