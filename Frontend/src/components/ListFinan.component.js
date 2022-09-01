@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 import { Link } from "react-router-dom";
 
-export default class TutorialsList extends Component {
+export default class ListFinan extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
@@ -150,16 +150,11 @@ export default class TutorialsList extends Component {
                 </label>{" "}
                 {currentTutorial.title}
               </div>
-              <div>
-                <label>
-                  <strong>Descrição:</strong>
-                </label>{" "}
-                {currentTutorial.description}
-              </div>
+              
               <div>
                 <label>
                   <strong>Valor:</strong>
-                </label>{" "}
+                </label>{" R$ "}
                 {currentTutorial.valor}
               </div>
               <div>
@@ -172,7 +167,7 @@ export default class TutorialsList extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>{" "}
-                {currentTutorial.published ? "Pago" : "A pagar"}
+                {currentTutorial.published ? " Pago" : " A pagar"}
               </div>
 
               <Link
@@ -185,7 +180,8 @@ export default class TutorialsList extends Component {
           ) : (
             <div>
               <br />
-              <p>Clique em um Debitos...</p>
+              <p>Selecione ou adicione um Debito...</p>
+              <br />
             </div>
           )}
         </div>
