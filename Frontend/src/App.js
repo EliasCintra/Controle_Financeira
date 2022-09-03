@@ -6,13 +6,14 @@ import "./App.css";
 import AddFinan from "./components/AddFinan.component";
 import EditFinan from "./components/EditFinan.component";
 import ListFinan from "./components/ListFinan.component";
+import Index from "./components/IndexFinan.component";
 
 class App extends Component {
   render() {
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
-          <Link to={"/tutorials"} className="navbar-brand">
+          <Link to={"/index"} className="navbar-brand">
             Finan
           </Link>
           <div className="navbar-nav mr-auto">
@@ -34,6 +35,7 @@ class App extends Component {
             <Route exact path={["/", "/tutorials"]} component={ListFinan} />
             <Route exact path="/add" component={AddFinan} />
             <Route path="/tutorials/:id" component={EditFinan} />
+            <Route path="index" component={Index} />
           </Switch>
         </div>
       </div>

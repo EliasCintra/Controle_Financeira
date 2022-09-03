@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 
-
-
 export default class AddFinan extends Component {
   constructor(props) {
     super(props);
@@ -116,6 +114,7 @@ export default class AddFinan extends Component {
             </div>
 
             <div className="form-group">
+          
               <label htmlFor="description">Descrição</label>
               <input
                 type="text"
@@ -133,8 +132,8 @@ export default class AddFinan extends Component {
               <label htmlFor="valor">Valor</label>
               <input
                 type="number"
+                displayType={"text"}
                 className="form-control"
-                precision="2"
                 id="valor"
                 required
                 value={this.state.valor}
@@ -149,11 +148,11 @@ export default class AddFinan extends Component {
               <label htmlFor="dia">Vencimento</label>
               <input
                 type="date"
+                min="2022-01-01" max="2022-12-31"
                 className="form-control"
                 id="dia"
                 required
                 value={this.state.dia}
-                min="2022-01-01" max="2022-12-31"
                 onChange={this.onChangeDia}
                 name="dia"
                 autocomplete="off"

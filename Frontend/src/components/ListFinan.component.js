@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import FinanDataService from "../services/tutorial.service";
 import { Link } from "react-router-dom";
 
 export default class ListFinan extends Component {
@@ -8,8 +8,8 @@ export default class ListFinan extends Component {
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.retrieveTutorials = this.retrieveTutorials.bind(this);
     this.refreshList = this.refreshList.bind(this);
-    this.setActiveTutorial = this.setActiveTutorial.bind(this);
-    this.removeAllTutorials = this.removeAllTutorials.bind(this);
+    this.selecioneDebito = this.selecioneDebito.bind(this);
+    this.removaTodosDebitos = this.removaTodosDebitos.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
 
     this.state = {
@@ -33,7 +33,7 @@ export default class ListFinan extends Component {
   }
 
   retrieveTutorials() {
-    TutorialDataService.getAll()
+    FinanDataService.getAll()
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -53,15 +53,15 @@ export default class ListFinan extends Component {
     });
   }
 
-  setActiveTutorial(tutorial, index) {
+  selecioneDebito(tutorial, index) {
     this.setState({
       currentTutorial: tutorial,
       currentIndex: index
     });
   }
 
-  removeAllTutorials() {
-    TutorialDataService.deleteAll()
+  removaTodosDebitos() {
+    FinanDataService.deleteAll()
       .then(response => {
         console.log(response.data);
         this.refreshList();
@@ -77,7 +77,7 @@ export default class ListFinan extends Component {
       currentIndex: -1
     });
 
-    TutorialDataService.findByTitle(this.state.searchTitle)
+    FinanDataService.findByTitle(this.state.searchTitle)
       .then(response => {
         this.setState({
           tutorials: response.data
@@ -125,7 +125,7 @@ export default class ListFinan extends Component {
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
-                  onClick={() => this.setActiveTutorial(tutorial, index)}
+                  onClick={() => this.selecioneDebito(tutorial, index)}
                   key={index}
                 >
                   {tutorial.title}
@@ -135,7 +135,7 @@ export default class ListFinan extends Component {
 
           <button
             className="m-3 btn btn-sm btn-danger"
-            onClick={this.removeAllTutorials}
+            onClick={this.removaTodosDebitos}
           >
             Remover todos
           </button>

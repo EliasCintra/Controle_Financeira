@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import TutorialDataService from "../services/tutorial.service";
+import FinanDataService from "../services/tutorial.service";
 
 export default class EditFinan extends Component {
   constructor(props) {
@@ -71,14 +71,14 @@ export default class EditFinan extends Component {
       return {
         currentTutorial: {
           ...prevState.currentTutorial,
-          title: dia
+          dia: dia
         }
       };
     });
   }
 
   getTutorial(id) {
-    TutorialDataService.get(id)
+    FinanDataService.get(id)
       .then(response => {
         this.setState({
           currentTutorial: response.data
@@ -100,7 +100,7 @@ export default class EditFinan extends Component {
       published: status
     };
 
-    TutorialDataService.update(this.state.currentTutorial.id, data)
+    FinanDataService.update(this.state.currentTutorial.id, data)
       .then(response => {
         this.setState(prevState => ({
           currentTutorial: {
@@ -116,7 +116,7 @@ export default class EditFinan extends Component {
   }
 
   updateTutorial() {
-    TutorialDataService.update(
+    FinanDataService.update(
       this.state.currentTutorial.id,
       this.state.currentTutorial
     )
@@ -132,7 +132,7 @@ export default class EditFinan extends Component {
   }
 
   deleteTutorial() {    
-    TutorialDataService.delete(this.state.currentTutorial.id)
+    FinanDataService.delete(this.state.currentTutorial.id)
       .then(response => {
         console.log(response.data);
         this.props.history.push('/tutorials')
@@ -194,7 +194,7 @@ export default class EditFinan extends Component {
                   id="dia"
                   autocomplete="off"
                   value={currentTutorial.dia}
-                  onChange={this.onChangedia}
+                  onChange={this.onChangeDia}
                 />
               </div>
               <div className="form-group">
