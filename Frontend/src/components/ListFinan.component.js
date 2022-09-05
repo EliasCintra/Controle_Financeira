@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import FinanDataService from "../services/tutorial.service";
 import { Link } from "react-router-dom";
+import { ImBin2 } from "react-icons/im";
+import { ImPencil } from "react-icons/im";
+import { ImSearch } from "react-icons/im";
 
 export default class ListFinan extends Component {
   constructor(props) {
@@ -109,7 +112,8 @@ export default class ListFinan extends Component {
                 type="button"
                 onClick={this.searchTitle}
               >
-                Pesquisar
+                <ImSearch />
+                   Pesquisar
               </button>
             </div>
           </div>
@@ -137,7 +141,8 @@ export default class ListFinan extends Component {
             className="m-3 btn btn-sm btn-danger"
             onClick={this.removaTodosDebitos}
           >
-            Remover todos
+            <ImBin2  /> 
+            ﾠRemover Tudo  
           </button>
         </div>
         <div className="col-md-6">
@@ -174,7 +179,8 @@ export default class ListFinan extends Component {
                 to={"/tutorials/" + currentTutorial.id}
                 className="badge badge-warning"
               >
-                Editar
+                <ImPencil />
+                ﾠEditar
               </Link>
             </div>
           ) : (

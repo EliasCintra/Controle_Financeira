@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
+import { ImFloppyDisk } from "react-icons/im";
+import { ImCross } from "react-icons/im";
 
 export default class AddFinan extends Component {
   constructor(props) {
@@ -18,7 +20,6 @@ export default class AddFinan extends Component {
       valor: "",
       dia: "",
       published: false,
-      
       submitted: false
     };
   }
@@ -46,6 +47,7 @@ export default class AddFinan extends Component {
       dia: e.target.value
     });
   }
+  
 
   saveTutorial() {
     var data = {
@@ -54,6 +56,7 @@ export default class AddFinan extends Component {
       valor: this.state.valor,
       dia: this.state.dia
     };
+
 
     TutorialDataService.create(data)
       .then(response => {
@@ -87,20 +90,27 @@ export default class AddFinan extends Component {
     });
   }
 
+
   render() {
     return (
       <div className="submit-form">
         {this.state.submitted ? (
           <div>
             <h4>Adicionado com Sucesso!</h4>
-            <button className="btn btn-success" onClick={this.newTutorial}>
-              Adicionar
+            <button className="btn btn-success mr-2" onClick={this.newTutorial}>
+              Adicionar outro
             </button>
+
+            <button className="btn btn-danger mr-2" >
+              <ImCross />
+              <a href="http://localhost:8081/tutorials" class="text-reset">ﾠ  Sair</a>
+            </button>
+
           </div>
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Nome </label>
+              <label htmlFor="title">Nome</label>
               <input
                 type="text"
                 className="form-control"
@@ -159,10 +169,18 @@ export default class AddFinan extends Component {
               />
             </div>
 
-            <button onClick={this.saveTutorial} className="btn btn-success">
-              Gravar
+            <button onClick={this.saveTutorial} className="btn btn-success mr-2">
+              <ImFloppyDisk />
+              ﾠ Gravar
             </button>
+
+            <button className="btn btn-danger mr-2">
+              <ImCross />
+              <a href="http://localhost:8081/tutorials" class="text-reset">ﾠ Sair</a>
+            </button>
+
           </div>
+          
         )}
       </div>
     );

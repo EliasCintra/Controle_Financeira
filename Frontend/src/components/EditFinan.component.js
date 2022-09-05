@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import FinanDataService from "../services/tutorial.service";
+import { ImFloppyDisk } from "react-icons/im";
+import { ImBin2 } from "react-icons/im";
+import { ImCheckboxChecked } from "react-icons/im"; 
+import { ImCheckboxUnchecked } from "react-icons/im"; 
 
 export default class EditFinan extends Component {
   constructor(props) {
@@ -201,7 +205,7 @@ export default class EditFinan extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>
-                {currentTutorial.published ? "Pago" : "A Pagar"}
+                {currentTutorial.published ? " Pago" : " A Pagar"}
               </div>
             </form>
 
@@ -210,14 +214,16 @@ export default class EditFinan extends Component {
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(false)}
               >
-                A pagar
+                <ImCheckboxUnchecked />
+                  A pagar
               </button>
             ) : (
               <button
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(true)}
               >
-                Pago
+                <ImCheckboxChecked />
+                 Pago
               </button>
             )}
 
@@ -225,7 +231,8 @@ export default class EditFinan extends Component {
               className="badge badge-danger mr-2"
               onClick={this.deleteTutorial}
             >
-              Deletar
+              <ImBin2 /> 
+               Deletar
             </button>
 
             <button
@@ -233,7 +240,8 @@ export default class EditFinan extends Component {
               className="badge badge-success"
               onClick={this.updateTutorial}
             >
-              Atualizar
+              <ImFloppyDisk/>
+                Gravar
             </button>
             <p>{this.state.message}</p>
           </div>
