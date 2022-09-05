@@ -19,7 +19,7 @@ db.sequelize.sync();
 
 // teste de conexão
 app.get("/", (req, res) => {
-  res.json({ message: "Bem vindo ao sistema FINAN." });
+  res.json({ message: "Bem vindo ao sistema Financeiro." });
 });
 
 require("./app/routes/turorial.routes")(app);

@@ -19,7 +19,7 @@ export default class AddFinan extends Component {
       description: "", 
       valor: "",
       dia: "",
-      published: false,
+      pagamento: false,
       submitted: false
     };
   }
@@ -66,7 +66,7 @@ export default class AddFinan extends Component {
           description: response.data.description,
           valor: response.data.valor,
           dia: response.data.dia,
-          published: response.data.published,
+          pagamento: response.data.pagamento,
 
           submitted: true
         });
@@ -84,7 +84,7 @@ export default class AddFinan extends Component {
       description: "",
       valor: "",
       dia: "",
-      published: false,
+      pagamento: false,
 
       submitted: false
     });
@@ -103,7 +103,7 @@ export default class AddFinan extends Component {
 
             <button className="btn btn-danger mr-2" >
               <ImCross />
-              <a href="http://localhost:8081/tutorials" class="text-reset">ﾠ  Sair</a>
+              <a href="http://localhost:8081/finan" class="text-reset">ﾠ  Sair</a>
             </button>
 
           </div>
@@ -124,7 +124,6 @@ export default class AddFinan extends Component {
             </div>
 
             <div className="form-group">
-          
               <label htmlFor="description">Descrição</label>
               <input
                 type="text"
@@ -136,7 +135,6 @@ export default class AddFinan extends Component {
                 autocomplete="off"
               />
             </div>
-
 
             <div className="form-group">
               <label htmlFor="valor">Valor</label>
@@ -152,7 +150,6 @@ export default class AddFinan extends Component {
                 autocomplete="off"
               />
             </div>
-
 
             <div className="form-group">
               <label htmlFor="dia">Vencimento</label>
@@ -176,11 +173,10 @@ export default class AddFinan extends Component {
 
             <button className="btn btn-danger mr-2">
               <ImCross />
-              <a href="http://localhost:8081/tutorials" class="text-reset">ﾠ Sair</a>
+              <a href="http://localhost:8081/finan" class="text-reset">ﾠ Sair</a>
             </button>
 
           </div>
-          
         )}
       </div>
     );

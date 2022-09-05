@@ -1,5 +1,5 @@
 module.exports = (sequelize, Sequelize) => {
-  const Tutorial = sequelize.define("tutorial", {
+  const Banco = sequelize.define("tutorial", {
     title: {
       type: Sequelize.STRING
     },
@@ -10,12 +10,12 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.STRING
     },
     dia: {
-      type: Sequelize.STRING
+      type: Sequelize.DATEONLY
     },
-    published: {
+    pagamento: {
       type: Sequelize.BOOLEAN
     }
   });
 
-  return Tutorial;
+  return Banco;
 };

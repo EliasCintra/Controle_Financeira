@@ -4,6 +4,7 @@ import { ImFloppyDisk } from "react-icons/im";
 import { ImBin2 } from "react-icons/im";
 import { ImCheckboxChecked } from "react-icons/im"; 
 import { ImCheckboxUnchecked } from "react-icons/im"; 
+import { ImCross } from "react-icons/im";
 
 export default class EditFinan extends Component {
   constructor(props) {
@@ -24,7 +25,7 @@ export default class EditFinan extends Component {
         description: "",
         valor: "",
         dia: "",
-        published: false
+        pagamento: false
       },
       message: ""
     };
@@ -101,7 +102,7 @@ export default class EditFinan extends Component {
       description: this.state.currentTutorial.description,
       valor: this.state.currentTutorial.valor,
       dia: this.state.currentTutorial.dia,
-      published: status
+      pagamento: status
     };
 
     FinanDataService.update(this.state.currentTutorial.id, data)
@@ -109,7 +110,7 @@ export default class EditFinan extends Component {
         this.setState(prevState => ({
           currentTutorial: {
             ...prevState.currentTutorial,
-            published: status
+            pagamento: status
           }
         }));
         console.log(response.data);
@@ -139,7 +140,7 @@ export default class EditFinan extends Component {
     FinanDataService.delete(this.state.currentTutorial.id)
       .then(response => {
         console.log(response.data);
-        this.props.history.push('/tutorials')
+        this.props.history.push('/finan')
       })
       .catch(e => {
         console.log(e);
@@ -205,11 +206,11 @@ export default class EditFinan extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>
-                {currentTutorial.published ? " Pago" : " A Pagar"}
+                {currentTutorial.pagamento ? " Pago" : " A Pagar"}
               </div>
             </form>
 
-            {currentTutorial.published ? (
+            {currentTutorial.pagamento ? (
               <button
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(false)}
@@ -237,11 +238,19 @@ export default class EditFinan extends Component {
 
             <button
               type="submit"
-              className="badge badge-success"
+              className="badge badge-success mr-2"
               onClick={this.updateTutorial}
             >
               <ImFloppyDisk/>
                 Gravar
+            </button>
+            <button
+              type="submit"
+              className="badge badge-danger"
+              onClick={this.updateTutorial}
+            >
+              <ImCross/>
+              <a href="http://localhost:8081/finan" class="text-reset">ﾠ  Sair</a>
             </button>
             <p>{this.state.message}</p>
           </div>

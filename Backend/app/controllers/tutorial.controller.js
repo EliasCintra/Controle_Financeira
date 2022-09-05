@@ -1,5 +1,5 @@
 const db = require("../models");
-const Tutorial = db.tutorials;
+const Banco = db.finan;
 const Op = db.Sequelize.Op;
 
 // criar e salvar um novo debito
@@ -16,13 +16,13 @@ exports.create = (req, res) => {
   const tutorial = {
     title: req.body.title,
     description: req.body.description,
-    published: req.body.published ? req.body.published : false,
+    pagamento: req.body.pagamento ? req.body.pagamento : false,
     valor: req.body.valor,
     dia: req.body.dia
   };
 
   // Salva o debito no banco de dados
-  Tutorial.create(tutorial)
+  Banco.create(tutorial)
     .then(data => {
       res.send(data);
     })
@@ -39,7 +39,7 @@ exports.findAll = (req, res) => {
   const title = req.query.title;
   var condition = title ? { title: { [Op.iLike]: `%${title}%` } } : null;
 
-  Tutorial.findAll({ where: condition })
+  Banco.findAll({ where: condition })
     .then(data => {
       res.send(data);
     })
@@ -55,7 +55,7 @@ exports.findAll = (req, res) => {
 exports.findOne = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.findByPk(id)
+  Banco.findByPk(id)
     .then(data => {
       if (data) {
         res.send(data);
@@ -76,7 +76,7 @@ exports.findOne = (req, res) => {
 exports.update = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.update(req.body, {
+  Banco.update(req.body, {
     where: { id: id }
   })
     .then(num => {
@@ -101,7 +101,7 @@ exports.update = (req, res) => {
 exports.delete = (req, res) => {
   const id = req.params.id;
 
-  Tutorial.destroy({
+  Banco.destroy({
     where: { id: id }
   })
     .then(num => {
@@ -124,7 +124,7 @@ exports.delete = (req, res) => {
 
 // Deletar todos os debitos do Banco de dados 
 exports.deleteAll = (req, res) => {
-  Tutorial.destroy({
+  Banco.destroy({
     where: {},
     truncate: false
   })
@@ -141,7 +141,7 @@ exports.deleteAll = (req, res) => {
 
 // encontrar todos os debitos publicados
 exports.findAllPublished = (req, res) => {
-  Tutorial.findAll({ where: { published: true } })
+  Banco.findAll({ where: { pagamento: true } })
     .then(data => {
       res.send(data);
     })

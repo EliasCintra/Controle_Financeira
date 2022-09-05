@@ -16,7 +16,7 @@ export default class ListFinan extends Component {
     this.searchTitle = this.searchTitle.bind(this);
 
     this.state = {
-      tutorials: [],
+      finan: [],
       currentTutorial: null,
       currentIndex: -1,
       searchTitle: ""
@@ -39,7 +39,7 @@ export default class ListFinan extends Component {
     FinanDataService.getAll()
       .then(response => {
         this.setState({
-          tutorials: response.data
+          finan: response.data
         });
         console.log(response.data);
       })
@@ -83,7 +83,7 @@ export default class ListFinan extends Component {
     FinanDataService.findByTitle(this.state.searchTitle)
       .then(response => {
         this.setState({
-          tutorials: response.data
+          finan: response.data
         });
         console.log(response.data);
       })
@@ -93,7 +93,7 @@ export default class ListFinan extends Component {
   }
 
   render() {
-    const { searchTitle, tutorials, currentTutorial, currentIndex } = this.state;
+    const { searchTitle, finan, currentTutorial, currentIndex } = this.state;
 
     return (
       <div className="list row">
@@ -122,8 +122,8 @@ export default class ListFinan extends Component {
           <h4>Listar Debitos</h4>
 
           <ul className="list-group">
-            {tutorials &&
-              tutorials.map((tutorial, index) => (
+            {finan &&
+              finan.map((tutorial, index) => (
                 <li
                   className={
                     "list-group-item " +
@@ -172,11 +172,11 @@ export default class ListFinan extends Component {
                 <label>
                   <strong>Status:</strong>
                 </label>{" "}
-                {currentTutorial.published ? " Pago" : " A pagar"}
+                {currentTutorial.pagamento ? " Pago" : " A pagar"}
               </div>
 
               <Link
-                to={"/tutorials/" + currentTutorial.id}
+                to={"/finan/" + currentTutorial.id}
                 className="badge badge-warning"
               >
                 <ImPencil />
