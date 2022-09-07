@@ -247,7 +247,6 @@ export default class EditFinan extends Component {
             <button
               type="submit"
               className="badge badge-danger"
-              onClick={this.updateTutorial}
             >
               <ImCross/>
               <a href="http://localhost:8081/finan" class="text-reset">ﾠ  Sair</a>

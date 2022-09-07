@@ -35,7 +35,7 @@ class App extends Component {
             <Route exact path={["/", "/finan"]} component={ListFinan} />
             <Route exact path="/add" component={AddFinan} />
             <Route path="/finan/:id" component={EditFinan} />
-            <Route path="index" component={Index} />
+            <Route path="/index" component={Index} />
           </Switch>
         </div>
       </div>
