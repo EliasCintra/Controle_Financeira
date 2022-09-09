@@ -10,6 +10,7 @@ export default class AddFinan extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeValor = this.onChangeValor.bind(this);
     this.onChangeDia = this.onChangeDia.bind(this);
+    this.onChangeTipo = this.onChangeTipo.bind(this);
     this.saveTutorial = this.saveTutorial.bind(this);
     this.newTutorial = this.newTutorial.bind(this);
 
@@ -19,6 +20,7 @@ export default class AddFinan extends Component {
       description: "", 
       valor: "",
       dia: "",
+      tipo: "",
       pagamento: false,
       submitted: false
     };
@@ -48,13 +50,19 @@ export default class AddFinan extends Component {
     });
   }
   
+  onChangeTipo(e) {
+    this.setState({
+     tipo: e.target.value
+    });
+  }
 
   saveTutorial() {
     var data = {
       title: this.state.title,
       description: this.state.description,
       valor: this.state.valor,
-      dia: this.state.dia
+      dia: this.state.dia,
+      tipo: this.state.tipo
     };
 
 
@@ -66,6 +74,7 @@ export default class AddFinan extends Component {
           description: response.data.description,
           valor: response.data.valor,
           dia: response.data.dia,
+          tipo: response.data.tipo,
           pagamento: response.data.pagamento,
 
           submitted: true
@@ -84,8 +93,8 @@ export default class AddFinan extends Component {
       description: "",
       valor: "",
       dia: "",
+      tipo: "",
       pagamento: false,
-
       submitted: false
     });
   }
@@ -100,17 +109,17 @@ export default class AddFinan extends Component {
             <button className="btn btn-success mr-2" onClick={this.newTutorial}>
               Adicionar outro
             </button>
-
+            <a href="http://localhost:8081/finan">
             <button className="btn btn-danger mr-2" >
               <ImCross />
-              <a href="http://localhost:8081/finan" class="text-reset">ﾠ  Sair</a>
+              ﾠ  Sair
             </button>
-
+            </a>
           </div>
         ) : (
           <div>
             <div className="form-group">
-              <label htmlFor="title">Nome</label>
+              <label htmlFor="title">Nome: </label>
               <input
                 type="text"
                 className="form-control"
@@ -124,7 +133,7 @@ export default class AddFinan extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Descrição</label>
+              <label htmlFor="description">Descrição: </label>
               <input
                 type="text"
                 className="form-control"
@@ -137,7 +146,7 @@ export default class AddFinan extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="valor">Valor</label>
+              <label htmlFor="valor">Valor: </label>
               <input
                 type="number"
                 displayType={"text"}
@@ -152,10 +161,10 @@ export default class AddFinan extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="dia">Vencimento</label>
+              <label htmlFor="dia">Vencimento: </label>
               <input
                 type="date"
-                min="2022-01-01" max="2022-12-31"
+                min="2000-01-01" max="2099-12-31"
                 className="form-control"
                 id="dia"
                 required
@@ -166,16 +175,29 @@ export default class AddFinan extends Component {
               />
             </div>
 
+            <div className="form-group">
+              <label htmlFor="tipo">Tipo do débito:  ﾠ </label>
+                <select id="tipo" name="tipo" required value={this.state.tipo} onChange={this.onChangeTipo}>
+                  <option value="Sem tipo"></option>
+                  <option value="Cartão de Crédito"> Cartão de Crédito </option>
+                  <option value="Financiamento"> Financiamento</option>
+                  <option value="Alimentação"> Alimentação </option>
+                  <option value="Transporte"> Transporte </option>
+                  <option value="Lazer"> Lazer </option>
+                  <option value="Outros"> Outros </option>
+                </select>
+            </div>
+          
             <button onClick={this.saveTutorial} className="btn btn-success mr-2">
               <ImFloppyDisk />
               ﾠ Gravar
             </button>
-
+            <a href="http://localhost:8081/finan">
             <button className="btn btn-danger mr-2">
               <ImCross />
-              <a href="http://localhost:8081/finan" class="text-reset">ﾠ Sair</a>
+              ﾠ Sair
             </button>
-
+            </a>
           </div>
         )}
       </div>

@@ -3,7 +3,7 @@ import React, { Component } from "react";
 import { Chart } from "react-google-charts";
 
 export const data = [
-  ["Mes", "Debitos", "Pagos", "A pagar"],
+  ["Mes", "Débitos", "Pagos", "A pagar"],
   ["Janeiro", 600, 400, 200],
   ["Fevereiro", 710, 460, 250],
   ["Março", 1420, 1120, 300],
@@ -14,7 +14,7 @@ export default class Index extends Component {
     render() {
         return ( 
         <div className="App">
-          <h1> Grafico de Debitos</h1>
+          <h1> Grafico de Débitos</h1>
           <Chart
           chartType="Bar"
           width="80%"

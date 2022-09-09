@@ -13,10 +13,11 @@ export default class EditFinan extends Component {
     this.onChangeDescription = this.onChangeDescription.bind(this);
     this.onChangeValor = this.onChangeValor.bind(this);
     this.onChangeDia = this.onChangeDia.bind(this);
-    this.getTutorial = this.getTutorial.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
-    this.updateTutorial = this.updateTutorial.bind(this);
-    this.deleteTutorial = this.deleteTutorial.bind(this);
+    this.onChangeTipo = this.onChangeTipo.bind(this);
+    this.obterDebito = this.obterDebito.bind(this);
+    this.atualizarStatus = this.atualizarStatus.bind(this);
+    this.atualizarDebito = this.atualizarDebito.bind(this);
+    this.deletarDebito = this.deletarDebito.bind(this);
 
     this.state = {
       currentTutorial: {
@@ -25,6 +26,7 @@ export default class EditFinan extends Component {
         description: "",
         valor: "",
         dia: "",
+        tipo: "",
         pagamento: false
       },
       message: ""
@@ -32,7 +34,7 @@ export default class EditFinan extends Component {
   }
 
   componentDidMount() {
-    this.getTutorial(this.props.match.params.id);
+    this.obterDebito(this.props.match.params.id);
   }
 
   onChangeTitle(e) {
@@ -81,8 +83,18 @@ export default class EditFinan extends Component {
       };
     });
   }
+  onChangeTipo(e) {
+    const tipo = e.target.value;
+    
+    this.setState(prevState => ({
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        tipo: tipo
+      }
+    }));
+  }
 
-  getTutorial(id) {
+  obterDebito(id) {
     FinanDataService.get(id)
       .then(response => {
         this.setState({
@@ -95,13 +107,14 @@ export default class EditFinan extends Component {
       });
   }
 
-  updatePublished(status) {
+  atualizarStatus(status) {
     var data = {
       id: this.state.currentTutorial.id,
       title: this.state.currentTutorial.title,
       description: this.state.currentTutorial.description,
       valor: this.state.currentTutorial.valor,
       dia: this.state.currentTutorial.dia,
+      tipo: this.state.currentTutorial.tipo,
       pagamento: status
     };
 
@@ -120,7 +133,7 @@ export default class EditFinan extends Component {
       });
   }
 
-  updateTutorial() {
+  atualizarDebito() {
     FinanDataService.update(
       this.state.currentTutorial.id,
       this.state.currentTutorial
@@ -128,7 +141,7 @@ export default class EditFinan extends Component {
       .then(response => {
         console.log(response.data);
         this.setState({
-          message: "Atualizado debito com sucesso!"
+          message: "Atualizado débito com sucesso!"
         });
       })
       .catch(e => {
@@ -136,7 +149,7 @@ export default class EditFinan extends Component {
       });
   }
 
-  deleteTutorial() {    
+  deletarDebito() {    
     FinanDataService.delete(this.state.currentTutorial.id)
       .then(response => {
         console.log(response.data);
@@ -154,10 +167,10 @@ export default class EditFinan extends Component {
       <div>
         {currentTutorial ? (
           <div className="edit-form">
-            <h4>Debito</h4>
+            <h4>Débito</h4>
             <form>
               <div className="form-group">
-                <label htmlFor="title">Nome</label>
+                <label htmlFor="title">Nome: </label>
                 <input
                   type="text"
                   className="form-control"
@@ -168,7 +181,7 @@ export default class EditFinan extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="description">Descrição</label>
+                <label htmlFor="description">Descrição: </label>
                 <input
                   type="text"
                   className="form-control"
@@ -179,7 +192,7 @@ export default class EditFinan extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="valor">Valor</label>
+                <label htmlFor="valor">Valor: </label>
                 <input
                   type="number"
                   className="form-control"
@@ -187,11 +200,10 @@ export default class EditFinan extends Component {
                   autocomplete="off"
                   value={currentTutorial.valor}
                   onChange={this.onChangeValor}
-                  
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="dia">Vencimento</label>
+                <label htmlFor="dia">Vencimento: </label>
                 <input
                   type="date"
                   min="2022-01-01" max="2022-12-31"
@@ -201,6 +213,18 @@ export default class EditFinan extends Component {
                   value={currentTutorial.dia}
                   onChange={this.onChangeDia}
                 />
+              </div>
+              <div className="form-group">
+              <label htmlFor="tipo">Selecione o tipo do débito: ﾠ </label>
+                <select id="tipo" name="tipo" value={currentTutorial.tipo} onChange={this.onChangeTipo}>
+                  <option value="Sem tipo"></option>
+                  <option value="Cartão de Crédito"> Cartão de Crédito </option>
+                  <option value="Financiamento"> Financiamento</option>
+                  <option value="Alimentação"> Alimentação </option>
+                  <option value="Transporte"> Transporte </option>
+                  <option value="Lazer"> Lazer </option>
+                  <option value="Outros"> Outros </option>
+                </select>
               </div>
               <div className="form-group">
                 <label>
@@ -213,7 +237,7 @@ export default class EditFinan extends Component {
             {currentTutorial.pagamento ? (
               <button
                 className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(false)}
+                onClick={() => this.atualizarStatus(false)}
               >
                 <ImCheckboxUnchecked />
                   A pagar
@@ -221,7 +245,7 @@ export default class EditFinan extends Component {
             ) : (
               <button
                 className="badge badge-primary mr-2"
-                onClick={() => this.updatePublished(true)}
+                onClick={() => this.atualizarStatus(true)}
               >
                 <ImCheckboxChecked />
                  Pago
@@ -230,7 +254,7 @@ export default class EditFinan extends Component {
 
             <button
               className="badge badge-danger mr-2"
-              onClick={this.deleteTutorial}
+              onClick={this.deletarDebito}
             >
               <ImBin2 /> 
                Deletar
@@ -239,24 +263,27 @@ export default class EditFinan extends Component {
             <button
               type="submit"
               className="badge badge-success mr-2"
-              onClick={this.updateTutorial}
+              onClick={this.atualizarDebito}
             >
               <ImFloppyDisk/>
                 Gravar
             </button>
+
+            <a href="http://localhost:8081/finan">
             <button
               type="submit"
               className="badge badge-danger"
             >
               <ImCross/>
-              <a href="http://localhost:8081/finan" class="text-reset">ﾠ  Sair</a>
+              ﾠ  Sair
             </button>
+            </a>
             <p>{this.state.message}</p>
           </div>
         ) : (
           <div>
             <br />
-            <p>Clique em um debito...</p>
+            <p>Clique em um débito...</p>
           </div>
         )}
       </div>

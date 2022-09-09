@@ -18,7 +18,8 @@ exports.create = (req, res) => {
     description: req.body.description,
     pagamento: req.body.pagamento ? req.body.pagamento : false,
     valor: req.body.valor,
-    dia: req.body.dia
+    dia: req.body.dia,
+    tipo: req.body.tipo
   };
 
   // Salva o debito no banco de dados

@@ -12,6 +12,9 @@ module.exports = (sequelize, Sequelize) => {
     dia: {
       type: Sequelize.DATEONLY
     },
+    tipo: {
+      type: Sequelize.STRING
+    },
     pagamento: {
       type: Sequelize.BOOLEAN
     }

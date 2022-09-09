@@ -10,7 +10,7 @@ export default class ListFinan extends Component {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.retrieveTutorials = this.retrieveTutorials.bind(this);
-    this.refreshList = this.refreshList.bind(this);
+    this.atualizarLista = this.atualizarLista.bind(this);
     this.selecioneDebito = this.selecioneDebito.bind(this);
     this.removaTodosDebitos = this.removaTodosDebitos.bind(this);
     this.searchTitle = this.searchTitle.bind(this);
@@ -48,7 +48,7 @@ export default class ListFinan extends Component {
       });
   }
 
-  refreshList() {
+  atualizarLista() {
     this.retrieveTutorials();
     this.setState({
       currentTutorial: null,
@@ -67,7 +67,7 @@ export default class ListFinan extends Component {
     FinanDataService.deleteAll()
       .then(response => {
         console.log(response.data);
-        this.refreshList();
+        this.atualizarLista();
       })
       .catch(e => {
         console.log(e);
@@ -102,7 +102,7 @@ export default class ListFinan extends Component {
             <input
               type="text"
               className="form-control"
-              placeholder="Pesquise por nome do debito."
+              placeholder="Pesquise por nome do débito."
               value={searchTitle}
               onChange={this.onChangeSearchTitle}
             />
@@ -119,7 +119,7 @@ export default class ListFinan extends Component {
           </div>
         </div>
         <div className="col-md-6">
-          <h4>Listar Debitos</h4>
+          <h4>Listar Débitos</h4>
 
           <ul className="list-group">
             {finan &&
@@ -148,7 +148,7 @@ export default class ListFinan extends Component {
         <div className="col-md-6">
           {currentTutorial ? (
             <div>
-              <h4>Debito</h4>
+              <h4>Débito</h4>
               <div>
                 <label>
                   <strong>Nome:</strong>
@@ -162,12 +162,18 @@ export default class ListFinan extends Component {
                 </label>{" R$ "}
                 {currentTutorial.valor}
               </div>
+
               <div>
-                <label>
-                  <strong>Data:</strong>
-                </label>{" "}
-                {currentTutorial.dia}
+              <label>
+              <strong>Data: </strong>
+                <input
+                  type="date"
+                  readonly
+                  value={currentTutorial.dia}
+                />
+              </label>
               </div>
+              
               <div>
                 <label>
                   <strong>Status:</strong>
@@ -186,7 +192,7 @@ export default class ListFinan extends Component {
           ) : (
             <div>
               <br />
-              <p>Selecione ou adicione um Debito...</p>
+              <p>Selecione ou adicione um Débito...</p>
               <br />
             </div>
           )}
