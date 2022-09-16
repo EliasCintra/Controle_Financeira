@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 // import FinanDataService from "../services/tutorial.service";
 import { Chart } from "react-google-charts";
+import { IoIosConstruct } from "react-icons/io";
+
 
 export const data = [
   ["Mes", "Débitos", "Pagos", "A pagar"],
@@ -21,6 +23,7 @@ export default class Index extends Component {
           height="400px"
           data={data}
         />
+          <h6> <strong>OBS:</strong>  Valores fictícios, dashboard ainda em construção. <IoIosConstruct/> </h6>
         </div>
         )
     }  

@@ -8,11 +8,13 @@
     "@testing-library/user-event": "^7.1.2",
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
+    "devextreme-react": "^22.1.5",
     "mysql2": "^2.3.3",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-google-charts": "^4.0.0",
     "react-icons": "^4.4.0",
+    "react-number-format": "^5.0.0-beta.4",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.4.0"
   },

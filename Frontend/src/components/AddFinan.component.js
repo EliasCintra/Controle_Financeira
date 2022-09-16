@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
+//import { NumericFormat } from 'react-number-format';
 import { ImFloppyDisk } from "react-icons/im";
 import { ImCross } from "react-icons/im";
 
@@ -21,6 +22,7 @@ export default class AddFinan extends Component {
       valor: "",
       dia: "",
       tipo: "",
+  
       pagamento: false,
       submitted: false
     };
@@ -76,7 +78,6 @@ export default class AddFinan extends Component {
           dia: response.data.dia,
           tipo: response.data.tipo,
           pagamento: response.data.pagamento,
-
           submitted: true
         });
         console.log(response.data);
@@ -121,7 +122,6 @@ export default class AddFinan extends Component {
             <div className="form-group">
               <label htmlFor="title">Nome: </label>
               <input
-                type="text"
                 className="form-control"
                 id="title"
                 required
@@ -144,7 +144,7 @@ export default class AddFinan extends Component {
                 autocomplete="off"
               />
             </div>
-
+          
             <div className="form-group">
               <label htmlFor="valor">Valor: </label>
               <input
@@ -157,6 +157,16 @@ export default class AddFinan extends Component {
                 onChange={this.onChangeValor}
                 name="valor"
                 autocomplete="off"
+                  /* <NumericFormat
+                      prefix={'R$ '}
+                      allowLeadingZeros
+                      thousandSeparator=","
+                      className="form-control"
+                      id="valor"
+                      //value={this.state.valor}
+                      onChange={this.onChangeValor}
+                      name="valor"
+                      autocomplete="off"  */
               />
             </div>
 
@@ -176,17 +186,21 @@ export default class AddFinan extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="tipo">Tipo do débito:  ﾠ </label>
+              <label htmlFor="tipo">Plano de conta: ﾠ </label>
                 <select id="tipo" name="tipo" required value={this.state.tipo} onChange={this.onChangeTipo}>
-                  <option value="Sem tipo"></option>
-                  <option value="Cartão de Crédito"> Cartão de Crédito </option>
-                  <option value="Financiamento"> Financiamento</option>
+                <option selected value="Sem tipo"> ﾠ </option>
+                  <option value="Aluguel"> Aluguel </option>
+                  <option value="Compras"> Compras </option>
                   <option value="Alimentação"> Alimentação </option>
                   <option value="Transporte"> Transporte </option>
                   <option value="Lazer"> Lazer </option>
                   <option value="Outros"> Outros </option>
                 </select>
-            </div>
+              </div>
+
+             
+
+          
           
             <button onClick={this.saveTutorial} className="btn btn-success mr-2">
               <ImFloppyDisk />

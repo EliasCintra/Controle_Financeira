@@ -4,7 +4,7 @@ import { ImFloppyDisk } from "react-icons/im";
 import { ImBin2 } from "react-icons/im";
 import { ImCheckboxChecked } from "react-icons/im"; 
 import { ImCheckboxUnchecked } from "react-icons/im"; 
-import { ImCross } from "react-icons/im";
+import { MdExitToApp } from "react-icons/md";
 
 export default class EditFinan extends Component {
   constructor(props) {
@@ -215,11 +215,10 @@ export default class EditFinan extends Component {
                 />
               </div>
               <div className="form-group">
-              <label htmlFor="tipo">Selecione o tipo do débito: ﾠ </label>
+              <label htmlFor="tipo">Plano de conta: ﾠ </label>
                 <select id="tipo" name="tipo" value={currentTutorial.tipo} onChange={this.onChangeTipo}>
-                  <option value="Sem tipo"></option>
-                  <option value="Cartão de Crédito"> Cartão de Crédito </option>
-                  <option value="Financiamento"> Financiamento</option>
+                  <option value="Aluguel"> Aluguel </option>
+                  <option value="Compras"> Compras </option>
                   <option value="Alimentação"> Alimentação </option>
                   <option value="Transporte"> Transporte </option>
                   <option value="Lazer"> Lazer </option>
@@ -272,9 +271,9 @@ export default class EditFinan extends Component {
             <a href="http://localhost:8081/finan">
             <button
               type="submit"
-              className="badge badge-danger"
+              className="badge badge-warning"
             >
-              <ImCross/>
+              <MdExitToApp/>
               ﾠ  Sair
             </button>
             </a>
