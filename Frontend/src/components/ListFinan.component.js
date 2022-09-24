@@ -9,7 +9,7 @@ export default class ListFinan extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
-    this.retrieveTutorials = this.retrieveTutorials.bind(this);
+    this.listarDebitos = this.listarDebitos.bind(this);
     this.atualizarLista = this.atualizarLista.bind(this);
     this.selecioneDebito = this.selecioneDebito.bind(this);
     this.removaTodosDebitos = this.removaTodosDebitos.bind(this);
@@ -24,7 +24,7 @@ export default class ListFinan extends Component {
   }
 
   componentDidMount() {
-    this.retrieveTutorials();
+    this.listarDebitos();
   }
 
   onChangeSearchTitle(e) {
@@ -35,7 +35,7 @@ export default class ListFinan extends Component {
     });
   }
 
-  retrieveTutorials() {
+  listarDebitos() {
     FinanDataService.getAll()
       .then(response => {
         this.setState({
@@ -49,7 +49,7 @@ export default class ListFinan extends Component {
   }
 
   atualizarLista() {
-    this.retrieveTutorials();
+    this.listarDebitos();
     this.setState({
       currentTutorial: null,
       currentIndex: -1

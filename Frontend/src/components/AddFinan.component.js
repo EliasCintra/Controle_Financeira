@@ -12,8 +12,8 @@ export default class AddFinan extends Component {
     this.onChangeValor = this.onChangeValor.bind(this);
     this.onChangeDia = this.onChangeDia.bind(this);
     this.onChangeTipo = this.onChangeTipo.bind(this);
-    this.saveTutorial = this.saveTutorial.bind(this);
-    this.newTutorial = this.newTutorial.bind(this);
+    this.salvarDebito = this.salvarDebito.bind(this);
+    this.novoDebito = this.novoDebito.bind(this);
 
     this.state = {
       id: null,
@@ -58,7 +58,7 @@ export default class AddFinan extends Component {
     });
   }
 
-  saveTutorial() {
+  salvarDebito() {
     var data = {
       title: this.state.title,
       description: this.state.description,
@@ -87,7 +87,7 @@ export default class AddFinan extends Component {
       });
   }
 
-  newTutorial() {
+  novoDebito() {
     this.setState({
       id: null,
       title: "",
@@ -107,7 +107,7 @@ export default class AddFinan extends Component {
         {this.state.submitted ? (
           <div>
             <h4>Adicionado com Sucesso!</h4>
-            <button className="btn btn-success mr-2" onClick={this.newTutorial}>
+            <button className="btn btn-success mr-2" onClick={this.novoDebito}>
               Adicionar outro
             </button>
             <a href="http://localhost:8081/finan">
@@ -202,7 +202,7 @@ export default class AddFinan extends Component {
 
           
           
-            <button onClick={this.saveTutorial} className="btn btn-success mr-2">
+            <button onClick={this.salvarDebito} className="btn btn-success mr-2">
               <ImFloppyDisk />
               ﾠ Gravar
             </button>
