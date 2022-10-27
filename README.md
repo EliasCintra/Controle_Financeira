@@ -1,4 +1,4 @@
-## Finan
+## Controle Financeira
 
 Sistema financeiro desenvolvido com React + Postgresql
 
