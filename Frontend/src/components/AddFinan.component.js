@@ -197,11 +197,7 @@ export default class AddFinan extends Component {
                   <option value="Outros"> Outros </option>
                 </select>
               </div>
-
-             
-
-          
-          
+              
             <button onClick={this.salvarDebito} className="btn btn-success mr-2">
               <ImFloppyDisk />
               ﾠ Gravar
